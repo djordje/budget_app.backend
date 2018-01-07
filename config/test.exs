@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :budget_app, BudgetApp.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("USER"),
+  password: "",
   database: "budget_app_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
