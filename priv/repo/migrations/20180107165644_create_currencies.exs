@@ -9,5 +9,6 @@ defmodule BudgetApp.Repo.Migrations.CreateCurrencies do
       timestamps()
     end
 
+    create unique_index(:currencies, [:iso_code])
   end
 end
