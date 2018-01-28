@@ -20,7 +20,7 @@ defmodule BudgetApp.Mixfile do
   def application do
     [
       mod: {BudgetApp.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto]
     ]
   end
 
@@ -38,7 +38,9 @@ defmodule BudgetApp.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+
+      {:scrivener_ecto, "~> 1.0"}
     ]
   end
 
