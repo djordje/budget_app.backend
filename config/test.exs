@@ -17,3 +17,8 @@ config :budget_app, BudgetApp.Repo,
   database: "budget_app_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Calculate faster during tests
+config :argon2_elixir,
+  t_cost: 2,
+  m_cost: 12
