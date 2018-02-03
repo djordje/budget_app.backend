@@ -8,10 +8,11 @@ defmodule BudgetApp.ExchangeRate do
     field :monthly, :boolean, default: false
     field :on_date, :naive_datetime
     field :rate, :float
-    field :from_currency_id, :id
-    field :to_currency_id, :id
 
     timestamps()
+
+    belongs_to :from_currency, BudgetApp.Currency
+    belongs_to :to_currency, BudgetApp.Currency
   end
 
   @doc false

@@ -8,9 +8,10 @@ defmodule BudgetApp.Expense do
     field :amout, :float
     field :desc, :string
     field :on_date, :naive_datetime
-    field :currency_id, :id
 
     timestamps()
+
+    belongs_to :currency, BudgetApp.Currency
   end
 
   @doc false

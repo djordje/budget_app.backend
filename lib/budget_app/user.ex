@@ -9,6 +9,8 @@ defmodule BudgetApp.User do
     field :secret, :string
 
     timestamps()
+
+    has_many :api_tokens, BudgetApp.APIToken
   end
 
   @doc false

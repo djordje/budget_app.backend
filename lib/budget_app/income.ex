@@ -9,9 +9,10 @@ defmodule BudgetApp.Income do
     field :desc, :string
     field :for_date, :naive_datetime
     field :on_date, :naive_datetime
-    field :currency_id, :id
 
     timestamps()
+
+    belongs_to :currency, BudgetApp.Currency
   end
 
   @doc false
