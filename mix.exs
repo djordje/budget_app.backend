@@ -49,6 +49,9 @@ defmodule BudgetApp.Mixfile do
 
       # Generate random UUIDs or other tokens
       {:secure_random, "~> 0.5"},
+
+      # DB factories for test suite
+      {:ex_machina, "~> 2.1", only: :test},
     ]
   end
 

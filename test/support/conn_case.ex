@@ -21,6 +21,8 @@ defmodule BudgetAppWeb.ConnCase do
       use Phoenix.ConnTest
       import BudgetAppWeb.Router.Helpers
 
+      import BudgetApp.Factories
+
       # The default endpoint for testing
       @endpoint BudgetAppWeb.Endpoint
     end

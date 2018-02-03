@@ -8,9 +8,10 @@ defmodule BudgetApp.APIToken do
     field :access_token, :string
     field :expires_at, :naive_datetime
     field :refresh_token, :string
-    field :user_id, :id
 
     timestamps()
+
+    belongs_to :user, BudgetApp.User
   end
 
   @doc false
