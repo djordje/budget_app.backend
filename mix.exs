@@ -46,6 +46,9 @@ defmodule BudgetApp.Mixfile do
       # Password hashing
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
+
+      # Generate random UUIDs or other tokens
+      {:secure_random, "~> 0.5"},
     ]
   end
 
