@@ -20,7 +20,7 @@ defmodule BudgetApp.Mixfile do
   def application do
     [
       mod: {BudgetApp.Application, []},
-      extra_applications: [:logger, :runtime_tools, :scrivener_ecto]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :timex]
     ]
   end
 
@@ -49,6 +49,9 @@ defmodule BudgetApp.Mixfile do
 
       # Generate random UUIDs or other tokens
       {:secure_random, "~> 0.5"},
+
+      # Time manipulation
+      {:timex, "~> 3.0"},
 
       # DB factories for test suite
       {:ex_machina, "~> 2.1", only: :test},

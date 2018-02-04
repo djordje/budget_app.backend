@@ -5,7 +5,7 @@ defmodule BudgetApp.Expense do
 
 
   schema "expenses" do
-    field :amout, :float
+    field :amount, :float
     field :desc, :string
     field :on_date, :naive_datetime
 
@@ -17,7 +17,7 @@ defmodule BudgetApp.Expense do
   @doc false
   def changeset(%Expense{} = expense, attrs) do
     expense
-    |> cast(attrs, [:amout, :on_date, :desc])
-    |> validate_required([:amout, :on_date, :desc])
+    |> cast(attrs, [:amount, :on_date, :desc, :currency_id])
+    |> validate_required([:amount, :on_date, :desc])
   end
 end

@@ -20,4 +20,11 @@ defmodule BudgetApp.Factories do
       user: build(:user)
     }
   end
+
+  def currency_factory do
+    %BudgetApp.Currency{
+      iso_code: sequence(:iso_code, &"TS#{&1}"),
+      name:     sequence(:name, &"test #{&1}")
+    }
+  end
 end

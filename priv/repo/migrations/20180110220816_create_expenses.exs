@@ -3,7 +3,7 @@ defmodule BudgetApp.Repo.Migrations.CreateExpenses do
 
   def change do
     create table(:expenses) do
-      add :amout, :float
+      add :amount, :float
       add :on_date, :naive_datetime
       add :desc, :text
       add :currency_id, references(:currencies, on_delete: :nothing)
