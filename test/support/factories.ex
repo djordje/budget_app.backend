@@ -17,6 +17,15 @@ defmodule BudgetApp.Factories do
     }
   end
 
+  def expense_factory do
+    %BudgetApp.Expense{
+      amount:   10,
+      desc:     "test",
+      on_date:  Timex.now,
+      currency: build(:currency)
+    }
+  end
+
   def currency_factory do
     %BudgetApp.Currency{
       iso_code: sequence(:iso_code, &"TS#{&1}"),
