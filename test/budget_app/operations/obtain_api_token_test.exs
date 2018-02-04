@@ -31,9 +31,8 @@ defmodule BudgetApp.Operations.ObtainAPITokenTest do
 
   test "saves record to the DB" do
     user = insert(:user)
-    assert Repo.aggregate(APIToken, :count, :id) == 0
     ObtainAPIToken.exec(user.email, "1234")
-    assert Repo.aggregate(APIToken, :count, :id) == 1
+    assert Repo.one(APIToken).user_id == user.id
   end
 
 end

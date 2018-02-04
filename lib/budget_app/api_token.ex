@@ -17,8 +17,8 @@ defmodule BudgetApp.APIToken do
   @doc false
   def changeset(%APIToken{} = api_token, attrs) do
     api_token
-    |> cast(attrs, [:access_token, :refresh_token, :expires_at])
-    |> validate_required([:access_token, :refresh_token, :expires_at])
+    |> cast(attrs, [:access_token, :refresh_token, :expires_at, :user_id])
+    |> validate_required([:access_token, :refresh_token, :expires_at, :user_id])
     |> unique_constraint(:access_token)
     |> unique_constraint(:refresh_token)
   end

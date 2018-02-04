@@ -11,6 +11,7 @@ defmodule BudgetApp.Operations.RefreshAPITokenTest do
     {:ok, new_api_token} = RefreshAPIToken.exec(api_token.access_token, api_token.refresh_token)
     refute new_api_token.id == api_token.id
     assert Repo.one(APIToken).id == new_api_token.id
+    assert new_api_token.user_id == api_token.user_id
   end
 
   test "returns error when access_token doesn't exist" do
