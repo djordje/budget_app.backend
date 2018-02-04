@@ -3,7 +3,6 @@ defmodule BudgetApp.Operations.RefreshAPIToken do
   alias BudgetApp.Repo
 
   @error {:error, "Invalid credentials!"}
-  @day_in_seconds 24*60*60
 
   def exec(access_token, _) when access_token in ["", nil], do: @error
   def exec(_, refresh_token) when refresh_token in ["", nil], do: @error
@@ -26,18 +25,9 @@ defmodule BudgetApp.Operations.RefreshAPIToken do
   defp check_refresh_token(_, _), do: false
 
   defp create_api_token(true, %APIToken{} = api_token) do
-    params = %{
-      user_id:       api_token.user_id,
-      access_token:  SecureRandom.base64(32),
-      refresh_token: SecureRandom.base64(32),
-      expires_at:    expires_at()
-    }
-    api_token = %APIToken{}
-      |> APIToken.changeset(params)
-      |> Repo.insert
-    case api_token do
-      {:error, _} -> false
-      {_, model}  -> model
+    case BudgetApp.Operations.APIToken.Create.exec(api_token.user_id) do
+      {:error, _}      -> false
+      {:ok, api_token} -> api_token
     end
   end
   defp create_api_token(_, _), do: false
@@ -49,14 +39,5 @@ defmodule BudgetApp.Operations.RefreshAPIToken do
     end
   end
   defp remove_old_api_token(_, _), do: false
-
-  defp expires_at(days_ahead \\ 30) do
-    expires_in = days_ahead * @day_in_seconds
-    now = DateTime.utc_now()
-    case DateTime.from_unix(DateTime.to_unix(now) + expires_in) do
-      {:ok, datetime} -> datetime
-      _               -> now
-    end
-  end
 
 end

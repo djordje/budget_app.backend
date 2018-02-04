@@ -20,7 +20,7 @@ defmodule BudgetApp.Mixfile do
   def application do
     [
       mod: {BudgetApp.Application, []},
-      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :timex]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :timex, :timex_ecto]
     ]
   end
 
@@ -52,6 +52,7 @@ defmodule BudgetApp.Mixfile do
 
       # Time manipulation
       {:timex, "~> 3.0"},
+      {:timex_ecto, "~> 3.0"},
 
       # DB factories for test suite
       {:ex_machina, "~> 2.1", only: :test},

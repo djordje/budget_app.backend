@@ -3,7 +3,6 @@ defmodule BudgetApp.APIToken do
   import Ecto.Changeset
   alias BudgetApp.APIToken
 
-
   schema "api_tokens" do
     field :access_token, :string
     field :expires_at, :naive_datetime
