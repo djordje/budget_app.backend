@@ -19,7 +19,7 @@ defmodule BudgetApp.Operations.Expense.Update do
   end
 
   defp update(nil, _), do: {:operation_error, "Expense not found!"}
-  defp update(_, %{}), do: {:operation_error, "No fields to update!"}
+  defp update(_, fields) when fields == %{}, do: {:operation_error, "No fields to update!"}
   defp update(expense, fields) do
     expense
     |> Expense.changeset(fields)

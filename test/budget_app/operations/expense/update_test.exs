@@ -2,11 +2,11 @@ defmodule BudgetApp.Operations.Expense.UpdateTest do
   use BudgetAppWeb.ConnCase, async: true
 
   alias BudgetApp.Operations.Expense.Update
-  # alias BudgetApp.Expense
-  # alias BudgetApp.Repo
 
   test "saves updated record to the DB" do
-    
+    expense = insert(:expense)
+    {:ok, updated_expense} = Update.exec(expense.id, amount: expense.amount + 20)
+    assert updated_expense.amount == expense.amount + 20
   end
 
   test "returns error when expense ID not given" do
