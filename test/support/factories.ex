@@ -38,7 +38,7 @@ defmodule BudgetApp.Factories do
 
   def currency_factory do
     %BudgetApp.Currency{
-      iso_code: sequence(:iso_code, &"TS#{&1}"),
+      iso_code: sequence(:iso_code, &String.slice("TS#{&1}", 0, 3)),
       name:     sequence(:name, &"test #{&1}")
     }
   end
