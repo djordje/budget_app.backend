@@ -17,6 +17,16 @@ defmodule BudgetApp.Factories do
     }
   end
 
+  def income_factory do
+    %BudgetApp.Income{
+      amount:   10,
+      desc:     "test",
+      on_date:  Timex.now,
+      for_date: Timex.now,
+      currency: build(:currency)
+    }
+  end
+
   def expense_factory do
     %BudgetApp.Expense{
       amount:   10,
