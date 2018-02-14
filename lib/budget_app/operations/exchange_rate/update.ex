@@ -1,6 +1,7 @@
 defmodule BudgetApp.Operations.ExchangeRate.Update do
   alias BudgetApp.ExchangeRate
   alias BudgetApp.Repo
+  alias BudgetApp.Components.FilterFields
 
   def exec(nil, _), do: {:operation_error, "Exchange rate ID is required!"}
   def exec(exchange_rate_id, fields) do
@@ -13,9 +14,8 @@ defmodule BudgetApp.Operations.ExchangeRate.Update do
 
   @updatable_fields [:on_date, :rate, :from_currency_id, :to_currency_id, :monthly]
   defp filter_fields(fields) do
+    {:ok, fields} = FilterFields.exec(@updatable_fields, fields)
     fields
-    |> Enum.into(%{})
-    |> Map.take(@updatable_fields)
   end
 
   defp update(nil, _), do: {:operation_error, "Exchange rate not found!"}

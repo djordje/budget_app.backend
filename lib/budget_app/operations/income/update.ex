@@ -1,6 +1,7 @@
 defmodule BudgetApp.Operations.Income.Update do
   alias BudgetApp.Income
   alias BudgetApp.Repo
+  alias BudgetApp.Components.FilterFields
 
   def exec(nil, _), do: {:operation_error, "Income ID is required!"}
   def exec(income_id, fields) do
@@ -13,9 +14,8 @@ defmodule BudgetApp.Operations.Income.Update do
 
   @updatable_fields [:on_date, :for_date, :currency_id, :amount, :desc]
   defp filter_fields(fields) do
+    {:ok, fields} = FilterFields.exec(@updatable_fields, fields)
     fields
-    |> Enum.into(%{})
-    |> Map.take(@updatable_fields)
   end
 
   defp update(nil, _), do: {:operation_error, "Income not found!"}

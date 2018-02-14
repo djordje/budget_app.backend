@@ -1,6 +1,7 @@
 defmodule BudgetApp.Operations.Currency.Update do
   alias BudgetApp.Currency
   alias BudgetApp.Repo
+  alias BudgetApp.Components.FilterFields
 
   def exec(nil, _), do: {:operation_error, "Currency ID is required!"}
   def exec(currency_id, fields) do
@@ -13,9 +14,8 @@ defmodule BudgetApp.Operations.Currency.Update do
 
   @updatable_fields [:name, :iso_code]
   defp filter_fields(fields) do
+    {:ok, fields} = FilterFields.exec(@updatable_fields, fields)
     fields
-    |> Enum.into(%{})
-    |> Map.take(@updatable_fields)
   end
 
   defp update(nil, _), do: {:operation_error, "Currency not found!"}
