@@ -27,6 +27,16 @@ defmodule BudgetApp.Factories do
     }
   end
 
+  def exchange_rate_factory do
+    %BudgetApp.ExchangeRate{
+      on_date:       Timex.now,
+      rate:          10,
+      monthly:       true,
+      from_currency: build(:currency),
+      to_currency:   build(:currency)
+    }
+  end
+
   def expense_factory do
     %BudgetApp.Expense{
       amount:   10,
