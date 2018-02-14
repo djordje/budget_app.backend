@@ -18,7 +18,7 @@ defmodule BudgetApp.ExchangeRate do
   @doc false
   def changeset(%ExchangeRate{} = exchange_rate, attrs) do
     exchange_rate
-    |> cast(attrs, [:on_date, :rate, :monthly])
+    |> cast(attrs, [:on_date, :rate, :monthly, :from_currency_id, :to_currency_id])
     |> validate_required([:on_date, :rate, :monthly])
   end
 end

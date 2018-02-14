@@ -9,8 +9,9 @@ defmodule BudgetApp.Operations.ExchangeRate.CreateTest do
     assert Repo.aggregate(ExchangeRate, :count, :id) == 0
     eur = insert(:currency, name: "Euro", iso_code: "EUR")
     rsd = insert(:currency, name: "Serbian dinar", iso_code: "RSD")
-    exchange_rate = Create.exec(Date.utc_today(), 118.43, eur.id, rsd.id)
-    assert {:ok, %ExchangeRate{}} = exchange_rate
+    {:ok, %ExchangeRate{} = exchange_rate} = Create.exec(Date.utc_today(), 118.43, eur.id, rsd.id)
+    assert exchange_rate.from_currency_id == eur.id
+    assert exchange_rate.to_currency_id == rsd.id
     assert Repo.aggregate(ExchangeRate, :count, :id) == 1
   end
 

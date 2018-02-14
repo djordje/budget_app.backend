@@ -8,7 +8,8 @@ defmodule BudgetApp.Operations.Expense.CreateTest do
   test "saves record to the DB" do
     currency = insert(:currency)
     assert Repo.aggregate(Expense, :count, :id) == 0
-    Create.exec(Date.utc_today, currency.id, 10, "Test desc")
+    {:ok, %Expense{} = expense} = Create.exec(Date.utc_today, currency.id, 10, "Test desc")
+    assert expense.currency_id == currency.id
     assert Repo.aggregate(Expense, :count, :id) == 1
   end
 

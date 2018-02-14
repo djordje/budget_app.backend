@@ -9,7 +9,8 @@ defmodule BudgetApp.Operations.Income.CreateTest do
     currency = insert(:currency)
     today    = Date.utc_today()
     assert Repo.aggregate(Income, :count, :id) == 0
-    assert {:ok, %Income{}} = Create.exec(today, today, currency.id, 10, "Test desc")
+    {:ok, %Income{} = income} = Create.exec(today, today, currency.id, 10, "Test desc")
+    assert income.currency_id == currency.id
     assert Repo.aggregate(Income, :count, :id) == 1
   end
 

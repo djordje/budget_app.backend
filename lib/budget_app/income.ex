@@ -18,7 +18,7 @@ defmodule BudgetApp.Income do
   @doc false
   def changeset(%Income{} = income, attrs) do
     income
-    |> cast(attrs, [:amount, :on_date, :for_date, :desc])
+    |> cast(attrs, [:amount, :on_date, :for_date, :desc, :currency_id])
     |> validate_required([:amount, :on_date, :for_date, :desc])
   end
 end
