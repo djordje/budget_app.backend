@@ -1,4 +1,4 @@
-# BudgetApp
+# BudgetApp [![Build Status](https://travis-ci.org/djordje/budget_app.backend.svg?branch=master)](https://travis-ci.org/djordje/budget_app.backend)
 
 To start your Phoenix server:
 
