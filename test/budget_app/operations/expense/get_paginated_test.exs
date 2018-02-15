@@ -4,16 +4,16 @@ defmodule BudgetApp.Operations.Expense.GetPaginatedTest do
   alias BudgetApp.Operations.Expense.GetPaginated
 
   test "returns paginated list" do
-    currencies = insert_list(20, :expense)
+    expenses = insert_list(20, :expense)
     {:ok, results} = GetPaginated.exec(1, 10)
-    assert results.entries       == Enum.take(currencies, 10)
+    assert results.entries       == Enum.take(expenses, 10)
     assert results.page_number   == 1
     assert results.page_size     == 10
     assert results.total_entries == 20
     assert results.total_pages   == 2
   end
 
-  test "returns empty list when no currencies in the DB" do
+  test "returns empty list when no expenses in the DB" do
     {:ok, results} = GetPaginated.exec(1)
     assert results.entries       == []
     assert results.page_number   == 1
