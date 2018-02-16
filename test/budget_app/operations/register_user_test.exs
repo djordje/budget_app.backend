@@ -6,20 +6,20 @@ defmodule BudgetApp.Operations.RegisterUserTest do
   alias BudgetApp.Repo
 
   test "returns error when email doesn't exist" do
-    expected = {:error, "Email not given!"}
+    expected = {:operation_error, "Email not given!"}
     assert expected == RegisterUser.exec(nil, nil, nil)
     assert expected == RegisterUser.exec("", nil, nil)
   end
 
   test "returns error when password doesn't exist" do
     email = "test@example.com"
-    expected = {:error, "Password not given!"}
+    expected = {:operation_error, "Password not given!"}
     assert expected == RegisterUser.exec(email, nil, nil)
     assert expected == RegisterUser.exec(email, "", nil)
   end
 
   test "returns error when password confirmation doesn't match password" do
-    expected = {:error, "Password not confirmed!"}
+    expected = {:operation_error, "Password not confirmed!"}
     assert expected == RegisterUser.exec("test@example.com", "1234", "4321")
   end
 
