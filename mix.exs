@@ -10,7 +10,9 @@ defmodule BudgetApp.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.travis": :test]
     ]
   end
 
@@ -56,6 +58,8 @@ defmodule BudgetApp.Mixfile do
 
       # DB factories for test suite
       {:ex_machina, "~> 2.1", only: :test},
+      # Code coverage for test suite
+      {:excoveralls, "~> 0.8", only: :test},
 
       # Code linter
       {:credo, "~> 0.9.0-rc3", only: [:dev, :test], runtime: false},
