@@ -2,7 +2,7 @@ defmodule BudgetApp.Operations.ObtainAPIToken do
   alias BudgetApp.User
   alias BudgetApp.Repo
 
-  @error {:error, "Invalid credentials!"}
+  @error {:operation_error, "Invalid credentials!"}
 
   def exec(email, _) when email in ["", nil], do: @error
   def exec(_, password) when password in ["", nil], do: @error
