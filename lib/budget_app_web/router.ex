@@ -5,7 +5,11 @@ defmodule BudgetAppWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", BudgetAppWeb do
+  scope "/v1", BudgetAppWeb.V1, as: :v1 do
     pipe_through :api
+
+    scope "/api_token" do
+      post "/obtain", APITokenController, :obtain
+    end
   end
 end
