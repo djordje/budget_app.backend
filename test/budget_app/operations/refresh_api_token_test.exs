@@ -15,25 +15,25 @@ defmodule BudgetApp.Operations.RefreshAPITokenTest do
   end
 
   test "returns error when access_token doesn't exist" do
-    expected = {:error, "Invalid credentials!"}
+    expected = {:operation_error, "Invalid credentials!"}
     assert expected == RefreshAPIToken.exec(nil, nil)
     assert expected == RefreshAPIToken.exec("", nil)
   end
 
   test "returns error when refresh_token doesn't exist" do
-    expected = {:error, "Invalid credentials!"}
+    expected = {:operation_error, "Invalid credentials!"}
     assert expected == RefreshAPIToken.exec("1234", nil)
     assert expected == RefreshAPIToken.exec("1234", "")
   end
 
   test "returns error when access_token not found" do
-    expected = {:error, "Invalid credentials!"}
+    expected = {:operation_error, "Invalid credentials!"}
     assert expected == RefreshAPIToken.exec("1234", "5678")
   end
 
   test "returns error when refresh_token doesn't match" do
     api_token = insert(:api_token)
-    expected = {:error, "Invalid credentials!"}
+    expected = {:operation_error, "Invalid credentials!"}
     assert expected == RefreshAPIToken.exec(api_token.access_token, "5678")
   end
 

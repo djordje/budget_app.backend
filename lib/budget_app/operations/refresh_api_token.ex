@@ -2,7 +2,7 @@ defmodule BudgetApp.Operations.RefreshAPIToken do
   alias BudgetApp.APIToken
   alias BudgetApp.Repo
 
-  @error {:error, "Invalid credentials!"}
+  @error {:operation_error, "Invalid credentials!"}
 
   def exec(access_token, _) when access_token in ["", nil], do: @error
   def exec(_, refresh_token) when refresh_token in ["", nil], do: @error
