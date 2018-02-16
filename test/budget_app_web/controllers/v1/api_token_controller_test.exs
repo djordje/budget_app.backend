@@ -17,4 +17,24 @@ defmodule BudgetAppWeb.V1.APITokenControllerTest do
       assert json_response(conn, 400)["errors"]
     end
   end
+
+  describe "refresh" do
+    test "creates new access and refresh tokens and remove old pair", %{conn: conn} do
+      api_token = insert(:api_token)
+      conn = post conn,
+        v1_api_token_path(conn, :refresh),
+        access_token: api_token.access_token, refresh_token: api_token.refresh_token
+      assert json_response(conn, 201)["data"]
+    end
+
+    test "respond with error unless access and refresh tokens given", %{conn: conn} do
+      conn = post conn, v1_api_token_path(conn, :refresh), access_token: nil, refresh_token: "1234"
+      assert json_response(conn, 400)["errors"]
+    end
+
+    test "respond with error unless api token record found", %{conn: conn} do
+      conn = post conn, v1_api_token_path(conn, :refresh), access_token: "1234", refresh_token: "1234"
+      assert json_response(conn, 400)["errors"]
+    end
+  end
 end

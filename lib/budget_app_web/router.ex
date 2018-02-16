@@ -10,6 +10,7 @@ defmodule BudgetAppWeb.Router do
 
     scope "/api_token" do
       post "/obtain", APITokenController, :obtain
+      post "/refresh", APITokenController, :refresh
     end
   end
 end
