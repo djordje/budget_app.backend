@@ -56,6 +56,9 @@ defmodule BudgetApp.Mixfile do
       {:timex, "~> 3.0"},
       {:timex_ecto, "~> 3.0"},
 
+      # Convert map keys from strings to atoms
+      {:atomic_map, "~> 0.8"},
+
       # DB factories for test suite
       {:ex_machina, "~> 2.1", only: :test},
       # Code coverage for test suite
