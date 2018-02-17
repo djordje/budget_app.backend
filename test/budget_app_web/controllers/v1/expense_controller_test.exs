@@ -1,13 +1,5 @@
 defmodule BudgetAppWeb.V1.ExpenseControllerTest do
-  use BudgetAppWeb.ConnCase
-
-  setup %{conn: conn} do
-    api_token = insert(:api_token)
-    conn = conn
-      |> put_req_header("accept", "application/json")
-      |> put_req_header("authorization", "Bearer #{api_token.access_token}")
-    {:ok, conn: conn}
-  end
+  use BudgetAppWeb.APIControllerCase
 
   describe "index" do
     test "returns paginated collection of expenses", %{conn: conn} do
@@ -31,8 +23,7 @@ defmodule BudgetAppWeb.V1.ExpenseControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
-      res  = get conn, v1_expense_path(conn, :index), page_number: 1
+      res  = get remove_authorization(conn), v1_expense_path(conn, :index), page_number: 1
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
@@ -68,7 +59,6 @@ defmodule BudgetAppWeb.V1.ExpenseControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
       {:ok, date} = Date.new(2018, 2, 17)
       currency = insert(:currency)
       req_body = %{
@@ -79,7 +69,7 @@ defmodule BudgetAppWeb.V1.ExpenseControllerTest do
           desc:        "Test"
         }
       }
-      res = post conn, v1_expense_path(conn, :create), req_body
+      res = post remove_authorization(conn), v1_expense_path(conn, :create), req_body
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
@@ -106,9 +96,8 @@ defmodule BudgetAppWeb.V1.ExpenseControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
       expense = insert(:expense, amount: 10.0)
-      res = put conn, v1_expense_path(conn, :update, expense.id), %{expense: %{amount: 12.5}}
+      res = put remove_authorization(conn), v1_expense_path(conn, :update, expense.id), %{expense: %{amount: 12.5}}
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
@@ -123,9 +112,8 @@ defmodule BudgetAppWeb.V1.ExpenseControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
       expense = insert(:expense)
-      res = delete conn, v1_expense_path(conn, :delete, expense.id)
+      res = delete remove_authorization(conn), v1_expense_path(conn, :delete, expense.id)
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]

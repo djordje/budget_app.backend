@@ -1,13 +1,5 @@
 defmodule BudgetAppWeb.V1.CurrenciyControllerTest do
-  use BudgetAppWeb.ConnCase
-
-  setup %{conn: conn} do
-    api_token = insert(:api_token)
-    conn = conn
-      |> put_req_header("accept", "application/json")
-      |> put_req_header("authorization", "Bearer #{api_token.access_token}")
-    {:ok, conn: conn}
-  end
+  use BudgetAppWeb.APIControllerCase
 
   describe "index" do
     test "returns paginated collection of currencies", %{conn: conn} do
@@ -20,8 +12,7 @@ defmodule BudgetAppWeb.V1.CurrenciyControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
-      res  = get conn, v1_currency_path(conn, :index), page_number: 1
+      res  = get remove_authorization(conn), v1_currency_path(conn, :index), page_number: 1
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
@@ -37,8 +28,9 @@ defmodule BudgetAppWeb.V1.CurrenciyControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
-      res = post conn, v1_currency_path(conn, :create), %{currency: %{name: "Serbian dinar", iso_code: "RSD"}}
+      res = post remove_authorization(conn),
+              v1_currency_path(conn, :create),
+              %{currency: %{name: "Serbian dinar", iso_code: "RSD"}}
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
@@ -55,9 +47,8 @@ defmodule BudgetAppWeb.V1.CurrenciyControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
       currency = insert(:currency)
-      res = put conn, v1_currency_path(conn, :update, currency.id), %{currency: %{iso_code: "EXP"}}
+      res = put remove_authorization(conn), v1_currency_path(conn, :update, currency.id), %{currency: %{iso_code: "EXP"}}
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
@@ -72,9 +63,8 @@ defmodule BudgetAppWeb.V1.CurrenciyControllerTest do
     end
 
     test "returns unauthorized unless access token given and valid", %{conn: conn} do
-      conn = delete_req_header(conn, "authorization")
       currency = insert(:currency)
-      res = delete conn, v1_currency_path(conn, :delete, currency.id)
+      res = delete remove_authorization(conn), v1_currency_path(conn, :delete, currency.id)
       res_body = json_response(res, 401)
       assert res_body["error"]
       refute res_body["data"]
