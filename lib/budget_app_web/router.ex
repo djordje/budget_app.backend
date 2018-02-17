@@ -22,5 +22,6 @@ defmodule BudgetAppWeb.Router do
     pipe_through [:api, :auth]
 
     resources "/currencies", CurrenciesController, only: [:index, :create, :update, :delete]
+    resources "/expenses", ExpenseController, only: [:index, :create, :update, :delete]
   end
 end
