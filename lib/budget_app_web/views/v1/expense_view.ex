@@ -1,7 +1,7 @@
 defmodule BudgetAppWeb.V1.ExpenseView do
   use BudgetAppWeb, :view
   alias BudgetAppWeb.V1.ExpenseView
-  alias BudgetAppWeb.V1.CurrenciesView
+  alias BudgetAppWeb.V1.CurrencyView
 
   def render("index.json", %{paginated: paginated}) do
     %{
@@ -23,7 +23,7 @@ defmodule BudgetAppWeb.V1.ExpenseView do
       amount: expense.amount,
       on_date: expense.on_date,
       desc: expense.desc,
-      currency: render_one(expense.currency, CurrenciesView, "currency.json", as: :currency)
+      currency: render_one(expense.currency, CurrencyView, "currency.json", as: :currency)
     }
   end
 end

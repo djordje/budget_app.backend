@@ -1,4 +1,4 @@
-defmodule BudgetAppWeb.V1.CurrenciesController do
+defmodule BudgetAppWeb.V1.CurrencyController do
   use BudgetAppWeb, :controller
 
   alias BudgetApp.Operations.Currency
