@@ -1,4 +1,4 @@
-# BudgetApp [![Build Status](https://travis-ci.org/djordje/budget_app.backend.svg?branch=master)](https://travis-ci.org/djordje/budget_app.backend)
+# BudgetApp [![Build Status](https://travis-ci.org/djordje/budget_app.backend.svg?branch=master)](https://travis-ci.org/djordje/budget_app.backend) [![Coverage Status](https://coveralls.io/repos/github/djordje/budget_app.backend/badge.svg?branch=master)](https://coveralls.io/github/djordje/budget_app.backend?branch=master)
 
 To start your Phoenix server:
 
