@@ -23,5 +23,6 @@ defmodule BudgetAppWeb.Router do
 
     resources "/currencies", CurrencyController, only: [:index, :create, :update, :delete]
     resources "/expenses", ExpenseController, only: [:index, :create, :update, :delete]
+    resources "/incomes", IncomeController, only: [:index, :create, :update, :delete]
   end
 end
