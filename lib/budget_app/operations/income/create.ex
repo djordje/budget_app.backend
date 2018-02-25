@@ -10,11 +10,7 @@ defmodule BudgetApp.Operations.Income.Create do
   def exec(%Date{} = on_date, for_date, currency_id, amount, desc) do
     exec(Timex.to_datetime(on_date), for_date, currency_id, amount, desc)
   end
-
-  def exec(on_date, %Date{} = for_date, currency_id, amount, desc) do
-    exec(on_date, Timex.to_datetime(for_date), currency_id, amount, desc)
-  end
-
+  
   def exec(on_date, for_date, currency_id, amount, desc) do
     %Income{}
     |> Income.changeset(%{
