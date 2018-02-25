@@ -59,6 +59,9 @@ defmodule BudgetApp.Mixfile do
       # Convert map keys from strings to atoms
       {:atomic_map, "~> 0.8"},
 
+      # Handle CORS in elixir app
+      {:cors_plug, "~> 1.5"},
+
       # DB factories for test suite
       {:ex_machina, "~> 2.1", only: :test},
       # Code coverage for test suite
