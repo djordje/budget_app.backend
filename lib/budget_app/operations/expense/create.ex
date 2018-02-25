@@ -10,7 +10,7 @@ defmodule BudgetApp.Operations.Expense.Create do
     exec(Timex.to_datetime(on_date), currency_id, amount, desc)
   end
 
-  def exec(%DateTime{} = on_date, currency_id, amount, desc) do
+  def exec(on_date, currency_id, amount, desc) do
     %Expense{}
     |> Expense.changeset(%{
       amount:      amount,
