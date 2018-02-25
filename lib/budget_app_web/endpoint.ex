@@ -36,6 +36,8 @@ defmodule BudgetAppWeb.Endpoint do
     key: "_budget_app_key",
     signing_salt: "h65DXS08"
 
+  plug CORSPlug
+
   plug BudgetAppWeb.Router
 
   @doc """
