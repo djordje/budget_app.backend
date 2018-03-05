@@ -69,6 +69,9 @@ defmodule BudgetApp.Mixfile do
 
       # Code linter
       {:credo, "~> 0.9.0-rc3", only: [:dev, :test], runtime: false},
+
+      # Building a release
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 
