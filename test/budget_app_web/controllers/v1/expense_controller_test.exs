@@ -4,7 +4,7 @@ defmodule BudgetAppWeb.V1.ExpenseControllerTest do
   describe "index" do
     test "returns paginated collection of expenses", %{conn: conn} do
       expenses = insert_list(5, :expense)
-      expense  = Enum.at(expenses, 0)
+      expense  = Enum.at(expenses, 4)
       res        = get conn, v1_expense_path(conn, :index), page_number: 1
       res_body   = json_response(res, 200)
       assert res_body["data"]
