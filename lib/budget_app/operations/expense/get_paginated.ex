@@ -4,6 +4,7 @@ defmodule BudgetApp.Operations.Expense.GetPaginated do
 
   def resource_query(_filters) do
     from e in Expense,
-      preload: :currency
+      preload: :currency,
+      order_by: [desc: e.on_date, desc: e.id]
   end
 end
