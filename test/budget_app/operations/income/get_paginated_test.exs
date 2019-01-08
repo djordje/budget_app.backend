@@ -6,7 +6,7 @@ defmodule BudgetApp.Operations.Income.GetPaginatedTest do
   test "returns paginated list" do
     incomes = insert_list(20, :income)
     {:ok, results} = GetPaginated.exec(1, 10)
-    assert results.entries       == Enum.take(incomes, 10)
+    assert results.entries       == Enum.reverse(incomes) |> Enum.take(10)
     assert results.page_number   == 1
     assert results.page_size     == 10
     assert results.total_entries == 20

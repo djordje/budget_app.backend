@@ -4,7 +4,7 @@ defmodule BudgetAppWeb.V1.IncomeControllerTest do
   describe "index" do
     test "returns paginated collection of incomes", %{conn: conn} do
       incomes  = insert_list(5, :income)
-      income   = Enum.at(incomes, 0)
+      income   = Enum.at(incomes, 4)
       res      = get conn, v1_income_path(conn, :index), page_number: 1
       res_body = json_response(res, 200)
       assert res_body["data"]
