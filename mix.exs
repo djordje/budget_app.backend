@@ -22,7 +22,7 @@ defmodule BudgetApp.Mixfile do
   def application do
     [
       mod: {BudgetApp.Application, []},
-      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :timex, :timex_ecto]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto]
     ]
   end
 
@@ -35,15 +35,18 @@ defmodule BudgetApp.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
+      {:ecto_sql, "~> 3.0"},
+      {:phoenix_ecto, "~> 4.0"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:plug_cowboy, "~> 1.0"},
+      {:plug_cowboy, "~> 2.0"},
+      {:plug, "~> 1.7"},
+      {:jason, "~> 1.0"},
 
       # Ecto pagination
-      {:scrivener_ecto, "~> 1.0"},
+      {:scrivener_ecto, "~> 2.0"},
 
       # Password hashing
       {:comeonin, "~> 4.0"},
@@ -54,13 +57,13 @@ defmodule BudgetApp.Mixfile do
 
       # Time manipulation
       {:timex, "~> 3.0"},
-      {:timex_ecto, "~> 3.0"},
+#      {:timex_ecto, "~> 3.0"},
 
       # Convert map keys from strings to atoms
       {:atomic_map, "~> 0.8"},
 
       # Handle CORS in elixir app
-      {:cors_plug, "~> 1.5"},
+      {:cors_plug, "~> 2.0"},
 
       # DB factories for test suite
       {:ex_machina, "~> 2.1", only: :test},
@@ -68,10 +71,10 @@ defmodule BudgetApp.Mixfile do
       {:excoveralls, "~> 0.8", only: :test},
 
       # Code linter
-      {:credo, "~> 0.9.0-rc3", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
 
       # Building a release
-      {:distillery, "~> 1.5", runtime: false}
+      {:distillery, "~> 2.0", runtime: false}
     ]
   end
 
@@ -85,7 +88,7 @@ defmodule BudgetApp.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

@@ -17,7 +17,7 @@ defmodule BudgetAppWeb.BearerAuthorization do
   end
   
   defp send_unauthorized_response(conn) do
-    body = Poison.encode!(%{error: "Invalid or missing credentials"})
+    body = Jason.encode!(%{error: "Invalid or missing credentials"})
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(401, body)

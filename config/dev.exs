@@ -37,7 +37,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :budget_app, BudgetApp.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: System.get_env("USER"),
   password: "",
   database: "budget_app_dev",

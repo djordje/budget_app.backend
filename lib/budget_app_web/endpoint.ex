@@ -1,7 +1,8 @@
 defmodule BudgetAppWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :budget_app
 
-  socket "/socket", BudgetAppWeb.UserSocket
+  socket "/socket", BudgetAppWeb.UserSocket,
+    websocket: true
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -23,7 +24,7 @@ defmodule BudgetAppWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Jason
 
   plug Plug.MethodOverride
   plug Plug.Head

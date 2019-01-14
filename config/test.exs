@@ -11,7 +11,6 @@ config :logger, level: :warn
 
 # Configure your database
 config :budget_app, BudgetApp.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: System.get_env("USER"),
   password: "",
   database: "budget_app_test",
